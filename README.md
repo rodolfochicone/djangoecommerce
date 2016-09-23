@@ -1,0 +1,2 @@
+# djangoecommerce
+Projeto de estudo
