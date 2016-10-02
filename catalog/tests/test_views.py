@@ -1,6 +1,10 @@
+# coding=utf-8
+
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
+
 from model_mommy import mommy
+
 from catalog.models import Product, Category
 
 
@@ -21,8 +25,8 @@ class ProductListTestCase(TestCase):
 
     def test_context(self):
         response = self.client.get(self.url)
-        self.assertTrue('product_list' in response.context)
-        product_list = response.context['product_list']
+        self.assertTrue('products' in response.context)
+        product_list = response.context['products']
         self.assertEquals(product_list.count(), 3)
         paginator = response.context['paginator']
         self.assertEquals(paginator.num_pages, 4)

@@ -1,15 +1,21 @@
+# coding=utf-8
+
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
-from.models import Product, Category
+from .models import Product, Category
+
 
 class ProductListView(generic.ListView):
 
     model = Product
     template_name = 'catalog/product_list.html'
+    context_object_name = 'products'
     paginate_by = 3
 
+
 product_list = ProductListView.as_view()
+
 
 class CategoryListView(generic.ListView):
 
@@ -25,7 +31,9 @@ class CategoryListView(generic.ListView):
         context['current_category'] = get_object_or_404(Category, slug=self.kwargs['slug'])
         return context
 
+
 category = CategoryListView.as_view()
+
 
 def product(request, slug):
     product = Product.objects.get(slug=slug)
